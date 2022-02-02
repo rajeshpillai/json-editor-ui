@@ -42,7 +42,6 @@ export default function Tree({data=[], isChild = false, onLoadContent}) {
             <li onClick={(e) => handleToggle(e, d)} 
               key={d.id}>
               {d.children && <button>{expanded ? "-" : "+"}</button>}
-              {d.title}
               {
                 Object.keys(d).map(v => {
                     return <div><span>{v}</span>:<span>{d[v].toString()}</span></div>
