@@ -43,6 +43,11 @@ export default function Tree({data=[], isChild = false, onLoadContent}) {
               key={d.id}>
               {d.children && <button>{expanded ? "-" : "+"}</button>}
               {d.title}
+              {
+                Object.keys(d).map(v => {
+                    return <div><span>{v}</span>:<span>{d[v].toString()}</span></div>
+                })
+              }
               { expanded&& 
                   <Tree 
                     data={d.children} 
