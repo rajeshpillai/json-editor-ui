@@ -16,56 +16,57 @@ export default function Tree({data=[], isChild = false, onLoadContent}) {
 
     setState(us);
 
-    console.log(us);  
     
-    // if parent_id is not undefined, means leaf/content node is clicked
-    if (d.parent_id !== undefined) {
-      // You can customize the logic like load content lazily etc.
-      onLoadContent(d.content)
-    }
   }
   
+  const re = function (d) {
+    return (
+      <li className="node-item" onClick={(e) => handleToggle(e, d)} 
+          key={d.id}>
+          { isObject(d) && 
+            Object.keys(d).map(v => {
+                return (
+                  <div>
+                     <span>{v}</span>: 
+                    <span>
+                    {
+                      (isArray(d[v]) || isObject(d[v]))
+                      ? <ul>{re(d[v])}</ul>
+                      : (
+                        <span>{d[v]}</span>
+                      )
+                    }
+                    </span>
+                  </div>
+                )
+            })
+          }
+
+          {!isObject(d) &&
+            <div>{d}</div>
+          }
+          
+        </li>
+    )
+  }
+
   return (
     <ul>
      {
-        data.map(d => {
-          let expanded = d.children && !state.includes(d.id);
+        isArray(data) && data.map(d => {
+          return re(d);
+        })
+     }
 
+     {
+        isObject(data) && Object.keys(data).map(d => {
 
           console.log("d: ", d);
           console.log("isObject: ", isObject(d));
-
-          return (
-            <li onClick={(e) => handleToggle(e, d)} 
-              key={d.id}>
-              {d.children && <button>{expanded ? "-" : "+"}</button>}
-              { isObject(d) && 
-                Object.keys(d).map(v => {
-                    return (
-                      <div>
-                        <span>{v}</span>:
-                        <span>
-                        {
-                          isArray(d[v]) 
-                          ? <Tree 
-                              data={d[v]} 
-                              isChild={true} 
-                              onLoadContent={onLoadContent} />
-                          : d[v].toString()
-                        }
-                        </span>
-                      </div>
-                    )
-                })
-              }
-
-              {!isObject(d) &&
-                <div>{d}</div>
-              }
-              
-            </li>
-          )
+          
+          return <><li>{d}<ul>{re(data[d])}</ul></li></>;
         })
+        
      }
    </ul>
   )
