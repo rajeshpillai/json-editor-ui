@@ -9,7 +9,7 @@ let menu_data = [
   {
     id: "1",
     title: "menu 1",
-    role: "admin",
+    role: ["admin","superviser"],
     children :[
       { id: "2", parent_id: "1", title: "menu 1.1", content: "Content 1"},
       { 
@@ -27,7 +27,7 @@ let menu_data = [
   {
     id: "6",
     title: "menu 2",
-    role: "user",
+    role: ["user"],
     children :[
       { id: "7", parent_id: "6", title: "menu 2.1", content: "Content 4"},
       { id: "8", parent_id: "6", title: "menu 2.2", content: "Content 5"},
