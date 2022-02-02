@@ -31,13 +31,23 @@ export default function Tree({data=[], isChild = false, onLoadContent}) {
         data.map(d => {
           let expanded = d.children && !state.includes(d.id);
 
+          Object.keys(d).forEach(key => {
+            // console.log("key: ", key, d[key], isArray(d[key]));
+          })
+
+
+          console.log("d: ", d);
+
           return (
             <li onClick={(e) => handleToggle(e, d)} 
               key={d.id}>
               {d.children && <button>{expanded ? "-" : "+"}</button>}
               {d.title}
               { expanded&& 
-                  <Tree data={d.children} isChild={true} onLoadContent={onLoadContent} />
+                  <Tree 
+                    data={d.children} 
+                    isChild={true} 
+                    onLoadContent={onLoadContent} />
               }
             </li>
           )
@@ -45,4 +55,8 @@ export default function Tree({data=[], isChild = false, onLoadContent}) {
      }
    </ul>
   )
+}
+
+function isArray(attrVal) {
+  return Array.isArray(attrVal);
 }

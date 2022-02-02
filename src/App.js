@@ -9,12 +9,14 @@ let menu_data = [
   {
     id: "1",
     title: "menu 1",
+    role: "admin",
     children :[
       { id: "2", parent_id: "1", title: "menu 1.1", content: "Content 1"},
       { 
         id: "3",
         parent_id: "1",
         title: "menu 1.2",
+        role: "admin",
         children: [
           {id: "4", parent_id: "3", title: "menu 1.2.1", content: "Content 2"},
           {id: "5", parent_id: "3", title: "menu 1.2.2", content: "Content 3"},          
@@ -25,6 +27,7 @@ let menu_data = [
   {
     id: "6",
     title: "menu 2",
+    role: "user",
     children :[
       { id: "7", parent_id: "6", title: "menu 2.1", content: "Content 4"},
       { id: "8", parent_id: "6", title: "menu 2.2", content: "Content 5"},
@@ -42,7 +45,7 @@ function App() {
   }
   return (
     <div className="container">
-      <h4 class="text-2xl text-left">TreeView Component</h4>
+      <h4 className="text-2xl text-left">TreeView Component</h4>
       <div className="app">
         <div className="tree shadow">
           <Tree 
