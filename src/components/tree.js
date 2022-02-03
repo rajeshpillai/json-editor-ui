@@ -41,11 +41,6 @@ export default function Tree({data=[], isChild = false, onLoadContent}) {
                 )
             })
           }
-
-          {!isObject(d) &&
-            <div>{d}</div>
-          }
-          
         </li>
     )
   }
